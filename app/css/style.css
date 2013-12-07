@@ -1,0 +1,16 @@
+body {
+	padding-top: 70px;
+}
+
+.menu {
+	margin-bottom: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #f7f5fa;
+	border-radius: 5px;
+}
+
+ul.bookmark {
+	margin-left: 28px;
+	margin-top: 5px;
+}

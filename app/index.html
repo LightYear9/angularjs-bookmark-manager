@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bookmark Manager - Save your bookmarks and find them later in a second</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">Bookmark Manager</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/about">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Hello !</a></li>
+                </ul>
+                    
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-controller="BookmarkCtrl">
+
+        <div class="row">
+            <div class="col-md-4 menu">
+                <h2><span class="glyphicon glyphicon-search"></span> Search</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input autofocus type="text" class="form-control" id="inputSearch" placeholder="Enter words and/or tags" ng-model="search">
+                        </div>
+                    </div>
+                </form>
+
+                <h2><span class="glyphicon glyphicon-floppy-save"></span> Add Bookmark</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputBookmarkLink" class="col-sm-2 control-label">Link</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputBookmarkLink" placeholder="Link" ng-model="bookmark.link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBookmarkTags" class="col-sm-2 control-label">Tags</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputBookmarkTags" placeholder="Tags#1, Tags#2, ..." ng-model="bookmark.tags">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" ng-click="addBookmark(bookmark)">Save</button>
+                            <button type="submit" class="btn btn-warning" ng-click="clearBookmarkForm(bookmark)">Clear</button>
+                        </div>
+                    </div>
+                </form>
+
+                <h2><span class="glyphicon glyphicon-floppy-save"></span> Add Tag</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="inputTagName">Tag</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTagName" placeholder="Tag" ng-model="tag.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="inputTagColor">Color</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control col-sm-2" id="inputTagColor" placeholder="#04aa05" ng-model="tag.color">
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" ng-click="addTag(tag)">Save</button>
+                            <button type="submit" class="btn btn-warning" ng-click="clearTagForm(tag)">Clear</button>
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="list-inline">
+                    <li ng-repeat="tag in tags">
+                        <span class="label" style="background-color:{{tag.color}};">{{tag.name}} <span class="glyphicon glyphicon-remove" ng-click="deleteTag(tag)"></span> </span>                    
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-8">
+
+                <h1><span class="glyphicon glyphicon-list"></span> Bookmarks</h1>
+
+                <ul class="list-unstyled" ng-repeat="bookmark in bookmarks | filter:search">
+                    <li>
+                        <span class="glyphicon glyphicon-pushpin">
+                        <a href="{{bookmark.link}}" target="_blank">{{bookmark.link}}</a> <span class="glyphicon glyphicon-remove" ng-click="deleteBookmark(bookmark)"></span>
+                        <ul class="list-inline bookmark">
+                            <li ng-repeat="tag in bookmark.tags">
+                                <display-tag tag="tag" bookmark-id="bookmark.id"></display-tag>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-route.min.js"></script>
+    <script src="lib/jquery/jquery-2.0.3.min.js"></script>
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+  </body>
+</html>
