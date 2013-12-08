@@ -20,8 +20,6 @@ Open your browser on `http://localhost/angular-bookmark-manager/app`
 - Add bookmarks
 - Use a "tag" input in the Add Bookmark form
 - Add other tags to a bookmark already created
-- Delete tag associated to bookmarks (Fix directive issue)
-- Add Color Picker for new Tag
 - Add Authentication
 - Add Node.js backend with MongoDB
 
