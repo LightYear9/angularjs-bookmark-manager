@@ -10,6 +10,7 @@
 
     <title>Bookmark Manager - Save your bookmarks and find them later in a second</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/colorpicker/css/colorpicker.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
   </head>
   
@@ -35,7 +36,7 @@
     <div class="container" ng-controller="BookmarkCtrl">
 
         <div class="row">
-            <div class="col-md-4 menu">
+            <div class="col-md-3 menu">
                 <h2><span class="glyphicon glyphicon-search"></span> Search</h2>
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
@@ -78,7 +79,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="inputTagColor">Color</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control col-sm-2" id="inputTagColor" placeholder="#04aa05" ng-model="tag.color">
+                            <input colorpicker type="text" class="form-control col-sm-2" id="inputTagColor" placeholder="#04aa05" ng-model="tag.color">
                         </div>
                     </div>
                      <div class="form-group">
@@ -100,17 +101,20 @@
 
                 <h1><span class="glyphicon glyphicon-list"></span> Bookmarks</h1>
 
-                <ul class="list-unstyled" ng-repeat="bookmark in bookmarks | filter:search">
-                    <li>
-                        <span class="glyphicon glyphicon-pushpin">
-                        <a href="{{bookmark.link}}" target="_blank">{{bookmark.link}}</a> <span class="glyphicon glyphicon-remove" ng-click="deleteBookmark(bookmark)"></span>
+                <div class="row">
+                    <div class="col-md-12 bookmark-item" ng-repeat="bookmark in bookmarks | filter:search">
+                        <h4>
+                            <span class="glyphicon glyphicon-pushpin"></span>
+                            <a href="{{bookmark.link}}" target="_blank">{{bookmark.link}}</a>
+                            <span class="glyphicon glyphicon-remove" ng-click="deleteBookmark(bookmark)"></span>
+                        </h4>
                         <ul class="list-inline bookmark">
                             <li ng-repeat="tag in bookmark.tags">
-                                <display-tag tag="tag" bookmark-id="bookmark.id"></display-tag>
+                                <display-tag tag="tag" bookmark-id="bookmark.id" delete-tag="deleteTagFromBookmark(bookmark.id, tag)"></display-tag>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -120,6 +124,7 @@
     <script src="lib/angular/angular-route.min.js"></script>
     <script src="lib/jquery/jquery-2.0.3.min.js"></script>
     <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <script src="lib/colorpicker/js/bootstrap-colorpicker-module.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/directives.js"></script>

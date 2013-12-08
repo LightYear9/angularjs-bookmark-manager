@@ -10,10 +10,20 @@ appControllers.controller('BookmarkCtrl', ['$scope', '$http', '$location',
 
 		$http.get('mock/tags.json').success(function(data) {
 			$scope.tags = data;
+
+			var tagNames = [];
+			$scope.tags.forEach(function(tag) {
+				tagNames.push(tag.name);
+			});
+
+			$('#inputBookmarkTags').tags({
+	            suggestions: tagNames,
+	            displayPopovers: true
+	        });
 		});
 
 		$scope.addBookmark = function(input) {
-
+			console.log(input);
 		}
 		
 		$scope.deleteBookmark = function(bookmark) {
@@ -49,7 +59,6 @@ appControllers.controller('BookmarkCtrl', ['$scope', '$http', '$location',
 			$scope.tags.forEach(function(scopeTag, index) {
 				if (scopeTag.id == tag.id) {
 					this.splice(index, 1);
-					return ;
 				}
 			}, $scope.tags);
 
@@ -57,7 +66,7 @@ appControllers.controller('BookmarkCtrl', ['$scope', '$http', '$location',
 				scopeBookmark.tags.forEach(function(scopeTag, indexTag) {
 					if (scopeTag.id == tag.id) {
 						this.splice(indexTag, 1);
-						return ;
+						
 					}
 				}, scopeBookmark.tags)
 				
@@ -70,6 +79,7 @@ appControllers.controller('BookmarkCtrl', ['$scope', '$http', '$location',
 					b.tags.forEach(function(t, indexTag) {
 						if (t.id == tag.id) {
 							this.splice(indexTag, 1);
+							return ;
 						}
 					}, b.tags);
 				}
@@ -81,5 +91,6 @@ appControllers.controller('BookmarkCtrl', ['$scope', '$http', '$location',
 			input.name = "";
 			input.color = "";
 		}
+		
 	}
 ]);
