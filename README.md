@@ -54,3 +54,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 [screenshot]: http://imageshack.com/a/img826/4408/cyaz.png
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kdelemme/angularjs-bookmark-manager/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
